@@ -1,10 +1,13 @@
 package mybot;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
+import yahoofinance.histquotes.Interval;
+import yahoofinance.quotes.stock.StockDividend;
 
-import java.io.IOException
-        ;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.List;
 
 public class StockUtil {
     public static String getPrice(String symbol) {
@@ -73,7 +76,66 @@ public class StockUtil {
         return "" + volume;
     }
 
-    public static void main(String[] args) {
-        System.out.println(StockUtil.getVolume("fb"));
+    public static String getDividend(String symbol) {
+        Stock stock;
+        StockDividend dividend;
+        try {
+            stock = YahooFinance.get(symbol);
+            if(stock == null) {
+                return "company does not exist.";
+            }
+            dividend = stock.getDividend();
+        } catch (IOException e) {
+            return "Invalid Input.";
+        }
+        return dividend.toString();
     }
+    public static String getHistory(String symbol) {
+        Stock stock;
+        List history;
+        try {
+            stock = YahooFinance.get(symbol);
+            if(stock == null) {
+                return "company does not exist.";
+            }
+            history = stock.getHistory();
+        } catch (IOException e) {
+            return "Invalid Input.";
+        }
+        return history.toString();
+    }
+
+    public static String getDividendHistory(String symbol) {
+        Stock stock;
+        List history;
+        try {
+            stock = YahooFinance.get(symbol);
+            if(stock == null) {
+                return "company does not exist.";
+            }
+            history = stock.getDividendHistory();
+        } catch (IOException e) {
+            return "Invalid Input.";
+        }
+        return history.toString();
+    }
+
+    public static String getSplits(String symbol) {
+        Stock stock;
+        List history;
+        try {
+            stock = YahooFinance.get(symbol);
+            if(stock == null) {
+                return "company does not exist.";
+            }
+            history = stock.getSplitHistory();
+        } catch (IOException e) {
+            return "Invalid Input.";
+        }
+        return history.toString();
+    }
+
+    /*(public static void main(String[] args) {
+        System.out.println(StockUtil.getVolume("fb"));
+    }*/
 }

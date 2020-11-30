@@ -25,6 +25,10 @@ public class StockBot extends PircBot {
             sendMessage(channel, "get previous close");
             sendMessage(channel, "get open");
             sendMessage(channel, "get volume");
+            sendMessage(channel, "get dividend");
+            sendMessage(channel, "get history");
+            sendMessage(channel, "get dividend history");
+            sendMessage(channel, "get split history");
             return;
         }
         int index = message.indexOf(":");
@@ -56,6 +60,26 @@ public class StockBot extends PircBot {
 
             case "get volume":
                 result = StockUtil.getVolume(symbol);
+                sendMessage(channel, result);
+                break;
+
+            case "get history":
+                result = StockUtil.getHistory(symbol);
+                sendMessage(channel, result);
+                break;
+
+            case "get dividend history":
+                result = StockUtil.getDividendHistory(symbol);
+                sendMessage(channel, result);
+                break;
+
+            case "get dividend":
+                result = StockUtil.getDividend(symbol);
+                sendMessage(channel, result);
+                break;
+
+            case "get split history":
+                result = StockUtil.getSplits(symbol);
                 sendMessage(channel, result);
                 break;
 

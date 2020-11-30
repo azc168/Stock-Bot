@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        // Now start our bot up.
+        // Start bot up.
         StockBot bot = new StockBot();
 
         // Enable debugging output.
